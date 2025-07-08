@@ -139,3 +139,74 @@ body {
   animation-duration: 19s;
   opacity: 0.3;
 }
+
+#fish {
+  height: 130px;
+  width: 202px;
+  background: url("./image.png") left center;
+  animation: fishAnimation 15s steps(1) infinite, moveFish 15s ease-in-out infinite;
+  position: absolute;
+  right: -200px;
+  top: 50%;
+  margin-top: -150px;
+  z-index: 100;
+}
+
+@keyframes fishAnimation {
+  0% {
+    background-position: -600px;
+  }
+  20% {
+    background-position: 0px;
+  }
+  25% {
+    background-position: -200px;
+  }
+  35% {
+    background-position: -400px;
+  }
+  40% {
+    background-position: -400px;
+  }
+  50% {
+    background-position: -200px;
+  }
+  60% {
+    background-position: -0px;
+  }
+  67% {
+    background-position: -600px;
+  }
+
+  100% {
+    background-position: -600px;
+  }
+}
+
+@keyframes moveFish {
+  0% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(calc(-50vw - 100px), 0);
+  }
+  25% {
+    transform: translate(calc(-50vw - 100px), 0);
+  }
+  35% {
+    transform: translate(calc(-50vw - 100px), -20vh);
+  }
+  50% {
+    transform: translate(-25vw, 15vh);
+  }
+  60% {
+    transform: translate(-25vw, -20vh);
+  }
+  67% {
+    transform: translate(-25vw, -20vh);
+  }
+
+  100% {
+    transform: translate(calc(-100vw - 300px), 0);
+  }
+}
