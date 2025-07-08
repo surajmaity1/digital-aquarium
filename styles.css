@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+  overflow: hidden;
+}
+.aquarium {
+  position: relative;
+  background-image: linear-gradient(0deg, #187be4, #3fb9f2);
+  width: 100vw;
+  height: 100vh;
+}
