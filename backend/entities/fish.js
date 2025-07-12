@@ -12,10 +12,14 @@ const FishSchema = mongoose.Schema(
       required: [true, "description required"],
       default: "",
     },
-
     imageUrl: {
       type: String,
       required: [true, "imageUrl required"],
+      default: "",
+    },
+    type: {
+      type: String,
+      required: [true, "type required"],
       default: "",
     },
   },

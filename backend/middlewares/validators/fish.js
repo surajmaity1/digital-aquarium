@@ -17,6 +17,10 @@ export const createFishValidator = async (req, res, next) => {
         "any.required": "description is required",
         "string.empty": "description cannot be empty",
       }),
+      type: joi.string().required().messages({
+        "any.required": "type is required",
+        "string.empty": "type cannot be empty",
+      }),
     });
   try {
     await schema.validateAsync(req.body, { abortEarly: false });
