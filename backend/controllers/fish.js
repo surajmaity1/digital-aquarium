@@ -8,6 +8,7 @@ export const createFishController = async (req, res) => {
       name: requestBody.name,
       description: requestBody.description,
       imageUrl: requestBody.imageUrl,
+      type: requestBody.type,
     };
     const response = await createFish(fish);
 
