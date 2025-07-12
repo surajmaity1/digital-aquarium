@@ -4,12 +4,11 @@ import { middleware } from "./middlewares/index.js";
 const app = express();
 const PORT = 3000;
 
-middleware(app);
-
 app.get("/health", (req, res) => {
   res.json({ message: `Server is up and running 🎉` });
 });
 
+middleware(app);
 app.use("/api", router);
 
 app.listen(PORT, () => {
