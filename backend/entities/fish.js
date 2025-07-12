@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const FishesSchema = mongoose.Schema(
+const FishSchema = mongoose.Schema(
   {
     name: {
       type: String,
@@ -13,9 +13,9 @@ const FishesSchema = mongoose.Schema(
       default: "",
     },
 
-    fishImage: {
+    imageUrl: {
       type: String,
-      required: [true, "fishImage required"],
+      required: [true, "imageUrl required"],
       default: "",
     },
   },
@@ -24,6 +24,4 @@ const FishesSchema = mongoose.Schema(
   }
 );
 
-const Fish = mongoose.model("Post", FishesSchema);
-
-module.exports = Fish;
+export const Fish = mongoose.model("Fish", FishSchema);
