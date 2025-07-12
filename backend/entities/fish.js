@@ -4,7 +4,7 @@ const FishSchema = mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "fish name required"],
+      required: [true, "name required"],
       default: "",
     },
     description: {
@@ -24,4 +24,4 @@ const FishSchema = mongoose.Schema(
   }
 );
 
-export const Fish = mongoose.model("Fish", FishSchema);
+export const Fish = mongoose.model("fish", FishSchema);
