@@ -1,2 +1,19 @@
+# Environment variables
 .env
-node_modules
+
+# Dependency directories
+node_modules/
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+
+# IDE and editor config
+.idea
+.vscode
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
