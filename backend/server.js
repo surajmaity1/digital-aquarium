@@ -1,9 +1,13 @@
 import express from "express";
 import { router } from "./routes/index.js";
 import { middleware } from "./middlewares/index.js";
-const app = express();
-const PORT = 3000;
+import dotenv from "dotenv";
+import mongoose from "mongoose";
 
+const app = express();
+dotenv.config();
+
+const PORT = process.env.SERVER_PORT;
 app.get("/health", (req, res) => {
   res.json({ message: `Server is up and running 🎉` });
 });
@@ -11,6 +15,12 @@ app.get("/health", (req, res) => {
 middleware(app);
 app.use("/api", router);
 
-app.listen(PORT, () => {
-  console.log(`Server is up and running 🎉 on port http://localhost:${PORT}`);
+mongoose.connect(`${process.env.MONGODB_URL}`).then(() => {
+  console.log('Mongodb Connected ... ');
+  app.listen(PORT, () => {
+    console.log(`Server is up and running 🎉 on port http://localhost:${PORT}.`);
+  });
+}).catch(() => {
+  console.log("Cannot connect to the database!", err);
+  process.exit();
 });

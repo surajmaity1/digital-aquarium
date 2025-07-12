@@ -1,9 +1,9 @@
 import express from "express";
-import { createFish } from "../controllers/fish.js";
+import { createFishController } from "../controllers/fish.js";
 import { createFishValidator } from "../middlewares/validators/fish.js";
 
 const router = express.Router();
 
-router.post("/", createFishValidator, createFish);
+router.post("/", createFishValidator, createFishController);
 
 export default router;
