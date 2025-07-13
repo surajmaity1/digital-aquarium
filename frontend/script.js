@@ -41,36 +41,21 @@ function toggleFishType() {
 }
 
 function showFishes(fishInfo = []) {
-  // const currentFish = fishContainer.querySelectorAll("img");
-
-  // If more fish are needed, add them
   for (let i = 0; i < fishInfo.length; i++) {
     const { id, imageUrl } = fishInfo[i] || {};
 
     const fishRef = document.querySelector(`[data-id="${id}"]`);
+
+    // If more fish are needed, add them
     if (!fishRef) {
       const img = document.createElement("img");
       img.src = imageUrl;
       img.dataset.id = id;
       img.style.top = `${Math.random() * 80}%`;
+      img.style.animationDuration = `${(Math.random() * 8) + 8}s`;
       fishContainer.appendChild(img);
     } 
   }
-
-  // // If fewer fish are needed, remove extra fishes
-  // if (currentFish.length > count) {
-  //   for (let i = count; i < currentFish.length; i++) {
-  //     currentFish[i].remove();
-  //   }
-  // }
-
-  // // Update fish type only if necessary
-  // for (let i = 0; i < fishContainer.children.length; i++) {
-  //   const img = fishContainer.children[i];
-  //   if (img.src !== fishUrl) {
-  //     img.src = fishUrl;
-  //   }
-  // }
 }
 
 
@@ -130,10 +115,10 @@ async function submitFish(event) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     });
-    alert("Fish added!");
     form.reset();
     closeModal();
     reloadTank();
+    alert("Fish added!");
   } catch (err) {
     alert("Failed to add fish.");
     console.error(err);
@@ -159,7 +144,9 @@ async function deleteFish(id) {
     await fetch(baseUrl + `/fish/${id}`, {
       method: 'DELETE'
     });
-    reloadTank();
+    closeModal();
+    const fishRef = document.querySelector(`[data-id="${id}"]`);
+    fishRef.remove();
   } catch (err) {
     alert("Failed to delete.");
     console.error(err);
