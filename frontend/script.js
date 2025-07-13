@@ -5,9 +5,14 @@ const allFishTypes = [
   "https://png.pngtree.com/recommend-works/png-clipart/20250624/ourmid/pngtree-little-blue-fish-baby-png-image_16574545.png"
 ];
 
+const animal = {
+    FISH: "fish",
+    OCTOPUS: "octopus"
+}
 const baseUrl = "https://3000-satyam1203-digitalaquar-9si5mjeg1fb.ws-us120.gitpod.io/api";
 
 let fishCount = 1;
+let previousOctopusXPosition = 100;
 let currentView = "2D";
 let selectedFishType = allFishTypes[0];
 
@@ -42,7 +47,7 @@ function toggleFishType() {
 
 function showFishes(fishInfo = []) {
   for (let i = 0; i < fishInfo.length; i++) {
-    const { id, imageUrl } = fishInfo[i] || {};
+    const { id, imageUrl, type } = fishInfo[i] || {};
 
     const fishRef = document.querySelector(`[data-id="${id}"]`);
 
@@ -51,8 +56,15 @@ function showFishes(fishInfo = []) {
       const img = document.createElement("img");
       img.src = imageUrl;
       img.dataset.id = id;
-      img.style.top = `${Math.random() * 80}%`;
-      img.style.animationDuration = `${(Math.random() * 8) + 8}s`;
+      if (type == animal.FISH) {
+        img.style.top = `${Math.random() * 75}%`;
+        img.style.animationDuration = `${(Math.random() * 8) + 8}s`;
+      } else if (type == animal.OCTOPUS) {
+        img.style.bottom = 0;
+        img.style.left = `${previousOctopusXPosition}px`;
+        previousOctopusXPosition += 70;
+        img.style.animation = "none";
+      }
       fishContainer.appendChild(img);
     } 
   }
@@ -69,7 +81,7 @@ async function openModal(mode) {
     modalBody.innerHTML = `
       <h3>Add a new animal</h3>
       <form onsubmit="submitFish(event)">
-        <input type="text" name="name" placeholder="Fish Name" required />
+        <input type="text" name="name" placeholder="Aquatic animal Name" required />
         <input type="text" name="imageUrl" placeholder="Image URL" required />
         <select name="type" required>
           <option value="">Select Type</option>
@@ -77,7 +89,7 @@ async function openModal(mode) {
           <option value="octopus">🐙 Octopus</option>
         </select>
         <textarea name="description" placeholder="Description" rows="3" required></textarea>
-        <button type="submit">Add Fish</button>
+        <button type="submit">Add</button>
       </form>
     `;
   } else if (mode === 'remove') {
@@ -118,9 +130,9 @@ async function submitFish(event) {
     form.reset();
     closeModal();
     reloadTank();
-    alert("Fish added!");
+    alert("Added!");
   } catch (err) {
-    alert("Failed to add fish.");
+    alert("Failed to add.");
     console.error(err);
   }
 }
@@ -132,13 +144,13 @@ async function fetchFishList() {
     const jsonResponse = await res.json();
     return jsonResponse?.data || [];
   } catch (err) {
-    console.error("Failed to load fish", err);
+    console.error("Failed to load.", err);
   }
 }
 
 // Delete fish
 async function deleteFish(id) {
-  if (!confirm("Delete this fish?")) return;
+  if (!confirm("Delete this animal?")) return;
 
   try {
     await fetch(baseUrl + `/fish/${id}`, {
