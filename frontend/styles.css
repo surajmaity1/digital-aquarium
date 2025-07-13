@@ -8,6 +8,7 @@
   --accent: #2d9cdb;
   --bg: #f0f9ff;
   --accent-dark: #207ab3;
+  --container-width: 500px;
 }
 * {
   box-sizing: border-box;
@@ -30,12 +31,15 @@ h1 {
   margin-bottom: 1rem;
 }
 .container {
-  transform: translate(-125px, 100px);
+  width: var(--container-width);
+  overflow: hidden;
+  transform: translate(0, 100px);
   transition: transform 0.5s ease;
 }
 .container3d {
+  overflow: unset;
   perspective: 200em;
-  transform: translate(-100px, 150px) rotateX(-30deg) scale(0.85);
+  transform: translate(0, 150px) rotateX(-30deg) scale(0.85);
 }
 .container3d .walls {
   transform-style: preserve-3d;
@@ -84,7 +88,31 @@ h1 {
   width: calc(var(--base-width) * 2.5);
   height: calc(var(--base-width) * 2);
   transform: translateY(150px) translateZ(-100px) rotateX(-90deg);
-  background: #e0f7ffcc;
+  background: radial-gradient(#ddd, #bbb);
+  background-size: 20px 20px;
+}
+.plants {
+  position: absolute;
+  bottom: -5px;
+  width: var(--container-width);
+}
+.plants img {
+  height: 50px;
+  margin: 0;
+  float: left;
+  animation: wavePlant 3s infinite ease-in-out;
+}
+.plants img:last-child {
+  float: right;
+}
+@keyframes wavePlant {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
 }
 #fishes {
   position: relative;
