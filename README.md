@@ -21,6 +21,8 @@ Used to create a new fish with specified details such as name, description, imag
 
 ### 📦 Sample Response
 
+**Status Code:** `201 OK`
+
 ```json
 {
   "message": "Fish created successfully",
