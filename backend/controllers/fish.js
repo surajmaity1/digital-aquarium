@@ -1,5 +1,5 @@
 import { SOMETHING_WENT_WRONG } from "../constants/fish.js";
-import { createFish, getFish, getFishById } from "../services/fish.js";
+import { createFish, deleteFishById, getFish, getFishById } from "../services/fish.js";
 
 export const createFishController = async (req, res) => {
   try {
@@ -49,6 +49,23 @@ export const getFishByIdController = async (req, res) => {
       message: "Fish fetched successfully",
       data: response,
     });
+  } catch (error) {
+    return res.boom.serverUnavailable(SOMETHING_WENT_WRONG);
+  }
+};
+
+export const deleteFishByIdController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const response = await deleteFishById(id);
+
+    if (!response) {
+      return res.status(404).json({
+        message: "No fish found. Please add some fish",
+      });
+    }
+
+    return res.status(204).json();
   } catch (error) {
     return res.boom.serverUnavailable(SOMETHING_WENT_WRONG);
   }
