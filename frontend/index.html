@@ -1,5 +1,4 @@
 <!-- https://codepen.io/satyam1203/pen/KwdPqvM?editors=1010 -->
-<!-- https://github.com/Satyam1203/projects/blob/master/digital-aquarium/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,14 +14,22 @@
     <h1>Fish Aquarium</h1>
 
     <div id="controls">
-        <p>Controls (Fish):
-            <button onclick="addFish()">+</button>
-            <button onclick="removeFish()">-</button>
+        <p>Manage Fish
+            <button onclick="openModal('add')">+</button>
+            <button onclick="openModal('remove')">-</button>
         </p>
-        <p>Toggle Fish type <button onclick="toggleFishType()">Change</button></p>
+        <!-- <p>Toggle Fish type <button onclick="toggleFishType()">Change</button></p> -->
         <p> Toggle view
             <button onClick="makeContainer3D()">Change</button>
         </p>
+    </div>
+
+    <!-- Modal container -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
     </div>
 
     <div class="container">
@@ -33,10 +40,7 @@
             <div class="wall right"></div>
             <div class="wall bottom"></div>
 
-            <div id="fishes">
-                <img
-                    src="https://png.pngtree.com/png-clipart/20250222/original/pngtree-small-fish-small-fish-cartoon-cute-cartoon-picture-image_3920714.png" />
-            </div>
+            <div id="fishes"></div>
         </div>
     </div>
     </div>
