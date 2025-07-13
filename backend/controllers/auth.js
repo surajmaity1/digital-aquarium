@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs'
-import User from '../model/User.model.js'
+import User from '../entities/user.js'
 import dotenv from 'dotenv'
 import jwt from 'jsonwebtoken'
 
@@ -8,6 +8,8 @@ dotenv.config()
 
 export const registerUser = async (req, res) => {
    try {
+    console.log('body',req.body);
+    
      const {name, email, password , gender } = req.body
     if(!name || !email || !password || !gender){
         return res.status(400).json({

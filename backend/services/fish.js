@@ -8,6 +8,7 @@ export const createFish = async (fish) => {
       name: response.name,
       description: response.description,
       imageUrl: response.imageUrl,
+      type: response.type,
     };
   } catch (error) {
     console.log(error);
@@ -27,6 +28,7 @@ export const getFish = async () => {
         name: element.name,
         description: element.description,
         imageUrl: element.imageUrl,
+        type: element.type,
       };
 
       fishList[index] = fish;
@@ -50,6 +52,7 @@ export const getFishById = async (id) => {
       name: response.name,
       description: response.description,
       imageUrl: response.imageUrl,
+      type: response.type,
     };
   } catch (error) {
     console.log(error);

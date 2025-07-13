@@ -4,7 +4,7 @@ const FishSchema = mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "fish name required"],
+      required: [true, "name required"],
       default: "",
     },
     description: {
@@ -12,10 +12,14 @@ const FishSchema = mongoose.Schema(
       required: [true, "description required"],
       default: "",
     },
-
     imageUrl: {
       type: String,
       required: [true, "imageUrl required"],
+      default: "",
+    },
+    type: {
+      type: String,
+      required: [true, "type required"],
       default: "",
     },
   },
@@ -24,4 +28,4 @@ const FishSchema = mongoose.Schema(
   }
 );
 
-export const Fish = mongoose.model("Fish", FishSchema);
+export const Fish = mongoose.model("fish", FishSchema);
