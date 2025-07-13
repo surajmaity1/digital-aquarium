@@ -3,6 +3,7 @@ import { router } from "./routes/index.js";
 import { middleware } from "./middlewares/index.js";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import cors from "cors";
 
 const app = express();
 dotenv.config();
@@ -13,6 +14,7 @@ app.get("/health", (req, res) => {
 });
 
 middleware(app);
+app.use(cors());
 app.use("/api", router);
 
 mongoose.connect(`${process.env.MONGODB_URL}`).then(() => {
