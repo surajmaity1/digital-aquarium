@@ -100,10 +100,10 @@ async function openModal(mode) {
     const data = await fetchFishList();
 
     const list = document.getElementById('fish-list');
-    list.innerHTML = data.map(({ _id, name, imageUrl }) => `
+    list.innerHTML = data.map(({ id, name, imageUrl }) => `
       <div class="fish-item">
         <span class="fish-name"><img src="${imageUrl}"> ${name}</span>
-        <span class="delete-btn" onclick="deleteFish('${_id}')">🗑️</span>
+        <span class="delete-btn" onclick="deleteFish('${id}')">🗑️</span>
       </div>
     `).join('');
   }
@@ -159,8 +159,7 @@ async function deleteFish(id) {
     await fetch(baseUrl + `/fish/${id}`, {
       method: 'DELETE'
     });
-    fetchFishList();
-    // syncFishCount();
+    reloadTank();
   } catch (err) {
     alert("Failed to delete.");
     console.error(err);
