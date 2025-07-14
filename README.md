@@ -10,8 +10,6 @@ Used to create a new fish with specified details such as name, description, imag
 
 ### ✅ Sample Request
 
-**Request Body:**
-
 ```json
 {
   "name": "Gold Fish",
@@ -23,7 +21,7 @@ Used to create a new fish with specified details such as name, description, imag
 
 ### 📦 Sample Response
 
-**Status Code:** `201 Created`
+**Status Code:** `201 OK`
 
 ```json
 {
@@ -137,7 +135,7 @@ This endpoint allows you to set the display dimension of the Digital Aquarium UI
 
 ### ✅ Sample Request
 
-**Method:** `PUT`
+**Method:** `POST`
 
 ### ✅ Sample Request
 
@@ -147,8 +145,7 @@ This endpoint allows you to set the display dimension of the Digital Aquarium UI
 }
 ```
 
-### 📦 Sample Success Response (when view is changed)
-
+📦 Sample Success Response (when view is changed)
 Status Code: 200 OK
 
 Response Body:
@@ -164,7 +161,7 @@ Response Body:
 
 ### 📦 Sample No-Update Response (when view is already the same)
 
-Status Code: 400 Bad Request
+Status Code: 400 OK
 
 Response Body:
 
