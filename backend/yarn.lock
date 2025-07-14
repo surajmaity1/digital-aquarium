@@ -211,7 +211,7 @@ cors@^2.8.5:
   dependencies:
     object-assign "^4"
     vary "^1"
-
+    
 debug@^4, debug@^4.3.5, debug@^4.4.0, debug@4.x:
   version "4.4.1"
   resolved "https://registry.npmjs.org/debug/-/debug-4.4.1.tgz"
