@@ -1,4 +1,5 @@
 import joi from "joi";
+import jwt from "jsonwebtoken"
 
 export const SignUpValidators = async (req, res, next) => {
    const passwordRegex = /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&])/;
@@ -62,5 +63,45 @@ export const loginValidators = async (req, res, next) => {
         next();
     } catch (error) {
         res.boom.badRequest(error.details[0].message);
+    }
+}
+
+export const jwtValidator = async (req, res, next) => {
+    try {
+        console.log('Authentication middleware triggered', req.cookies);
+        
+        // Get the token from the request
+         const token = req.cookies.token;
+
+        if (!token) {
+            return res.status(401).json({ message: 'Unauthorized' });
+        }
+        // Verify the token and extract user information
+        const user = jwt.verify(token, process.env.JWT_SECRET);
+        if (!user) {
+            return res.status(401).json({ message: 'Unauthorized' });
+        }
+        console.log('Authenticated user:', user);
+        // Attach user information to the request object
+        req.user = user;
+        next();
+    } catch (error) {
+        console.error('Error during authentication:', error);
+        res.status(500).json({ message: 'Error during authentication', error });
+    }
+}
+
+export const checkUserLoggedIn = async (req, res, next ) => {
+    try {
+        // Check if user is authenticated
+        if (!req.user) {
+            return res.status(401).json({ message: 'User is not authenticated' });
+        }
+        console.log('User is authenticated:', req.user);
+
+        next();
+    } catch (error) {
+        console.error('Error during user check:', error);
+        res.status(500).json({ message: 'Error during user check', error });    
     }
 }

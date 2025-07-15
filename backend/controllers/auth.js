@@ -161,15 +161,8 @@ export const logoutUser = async (req, res) => {
     }
 }
 
-export const resetPassword = (req, res) => {
 
 
-
-    res.status(200).json({
-        success: true,
-        message: 'Password reset successfully'
-    })
-}
 
 
 
