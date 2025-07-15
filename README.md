@@ -294,3 +294,88 @@ curl --location --request PUT 'https://digital-aquarium.vercel.app/api/dimension
     "view": "3D"
 }'
 ```
+---
+
+# 🔐 Authentication API
+
+API endpoints for user registration, login, and logout using cookie-based JWT authentication.
+
+---
+
+## ✳️ Register
+
+**POST** `/api/auth/register`
+
+Registers a new user.
+
+### 📥 Request Body
+
+```json
+{
+  "name": "suraj",
+  "email": "suraj@gmail.com",
+  "password": "@6Idfnh2k",
+  "gender": "male"
+}
+```
+
+### 📤 Sample cURL
+
+```sh
+curl --location 'http://localhost:3000/api/auth/register' --header 'Content-Type: application/json' --header 'Cookie: token=YOUR_JWT_TOKEN_HERE' --data-raw '{
+  "name": "suraj",
+  "email": "suraj@gmail.com",
+  "password": "@6Idfnh2k",
+  "gender": "male"
+}'
+```
+
+---
+
+## 🔑 Login
+
+**POST** `/api/auth/login`
+
+Logs in a user.
+
+### 📥 Request Body
+
+```json
+{
+  "email": "yashdevani5@gmail.com",
+  "password": "@6Idfnh2k"
+}
+```
+
+### 📤 Sample cURL
+
+```sh
+curl --location 'http://localhost:3000/api/auth/login' --header 'Content-Type: application/json' --header 'Cookie: token=YOUR_JWT_TOKEN_HERE' --data-raw '{
+  "email": "yashdevani5@gmail.com",
+  "password": "@6Idfnh2k"
+}'
+```
+
+---
+
+## 🚪 Logout
+
+**POST** `/api/auth/logout`
+
+Logs out the user by clearing the auth token (JWT cookie).
+
+### 📤 Sample cURL
+
+```sh
+curl --location 'http://localhost:3000/api/auth/logout' --data ''
+```
+
+### ✅ Response
+
+```json
+{
+  "message": "Logout successful"
+}
+```
+
+
