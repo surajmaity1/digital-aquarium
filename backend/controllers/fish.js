@@ -1,5 +1,11 @@
 import { SOMETHING_WENT_WRONG } from "../constants/fish.js";
-import { createFish, deleteFishById, getFish, getFishById } from "../services/fish.js";
+import {
+  createFish,
+  deleteFishById,
+  getFish,
+  getFishById,
+} from "../services/fish.js";
+import { idValidation } from "../utils/mongodbUtils.js";
 
 export const createFishController = async (req, res) => {
   try {
@@ -37,6 +43,13 @@ export const getFishController = async (req, res) => {
 export const getFishByIdController = async (req, res) => {
   try {
     const { id } = req.params;
+
+    if (!idValidation(id)) {
+      return res.status(400).json({
+        message: "Invalid fish id. Please use correct fish id",
+      });
+    }
+
     const response = await getFishById(id);
 
     if (!response) {
@@ -57,6 +70,13 @@ export const getFishByIdController = async (req, res) => {
 export const deleteFishByIdController = async (req, res) => {
   try {
     const { id } = req.params;
+
+    if (!idValidation(id)) {
+      return res.status(400).json({
+        message: "Invalid fish id. Please use correct fish id",
+      });
+    }
+
     const response = await deleteFishById(id);
 
     if (!response) {
