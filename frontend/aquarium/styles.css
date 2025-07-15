@@ -123,9 +123,14 @@ h1 {
   position: absolute;
   width: 60px;
   height: 60px;
-  animation: roamAround 10s linear infinite;
   filter: drop-shadow(1px 2px 2px #0003);
   opacity: 0.9;
+}
+#fishes img.fish {
+  animation: roamAround 10s linear infinite;
+}
+#fishes img.octopus {
+  animation: moveOctopus 2s linear infinite alternate;
 }
 @keyframes roamAround {
   0% {
@@ -141,6 +146,14 @@ h1 {
   }
   100% {
     left: 0;
+  }
+}
+@keyframes moveOctopus {
+  0% {
+    bottom: 0px;
+  }
+  100% {
+    bottom: 5px;
   }
 }
 #controls {

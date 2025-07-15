@@ -60,6 +60,7 @@ function showFishes(fishInfo = []) {
       const img = document.createElement("img");
       img.src = imageUrl;
       img.dataset.id = id;
+      img.classList.add(type);
       if (type == animal.FISH) {
         img.style.top = `${Math.random() * 75}%`;
         img.style.animationDuration = `${(Math.random() * 8) + 8}s`;
@@ -67,7 +68,7 @@ function showFishes(fishInfo = []) {
         img.style.bottom = 0;
         img.style.left = `${previousOctopusXPosition}px`;
         previousOctopusXPosition += 70;
-        img.style.animation = "none";
+        img.style.animationDuration = `${(Math.random() * 1.5) + 1}s`;
       }
       fishContainer.appendChild(img);
     } 
