@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-
+import cors from "cors";
 
 const app = express();
 dotenv.config();
@@ -21,6 +21,7 @@ app.use(cookieParser());  // Middleware to parse cookies
 
 
 middleware(app);
+app.use(cors());
 app.use("/api", router);
 
 mongoose.connect(`${process.env.MONGODB_URL}`).then(() => {

@@ -59,3 +59,18 @@ export const getFishById = async (id) => {
     throw error;
   }
 };
+
+export const deleteFishById = async (id) => {
+  try {
+    const response = await Fish.findByIdAndDelete(id);
+
+    if (!response) {
+      return null;
+    }
+
+    return true;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};

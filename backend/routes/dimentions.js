@@ -8,4 +8,8 @@ const router = express.Router();
 
 router.put("/", jwtValidator, checkUserLoggedIn, dimentionsValidators, updateDimentionsController);
 
+const router = express.Router();
+
+router.put("/", dimentionsValidators, updateDimentionsController);
+
 export default router;
