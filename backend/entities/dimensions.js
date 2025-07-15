@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const DimentionsSchema = mongoose.Schema(
+const DimensionsSchema = mongoose.Schema(
   {
     view: {
       type: String,
@@ -13,4 +13,4 @@ const DimentionsSchema = mongoose.Schema(
   }
 );
 
-export const Dimentions = mongoose.model("dimentions", DimentionsSchema);
+export const Dimensions = mongoose.model("dimensions", DimensionsSchema);

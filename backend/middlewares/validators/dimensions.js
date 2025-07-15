@@ -1,10 +1,10 @@
 import joi from "joi";
 import {
-  VIEW_DIMENTION_2D,
-  VIEW_DIMENTION_3D,
-} from "../../constants/dimentions.js";
+  VIEW_DIMENSION_2D,
+  VIEW_DIMENSION_3D,
+} from "../../constants/dimensions.js";
 
-export const dimentionsValidators = async (req, res, next) => {
+export const dimensionsValidators = async (req, res, next) => {
   const schema = joi
     .object()
     .strict()
@@ -12,7 +12,7 @@ export const dimentionsValidators = async (req, res, next) => {
       view: joi
         .string()
         .required()
-        .valid(VIEW_DIMENTION_2D, VIEW_DIMENTION_3D)
+        .valid(VIEW_DIMENSION_2D, VIEW_DIMENSION_3D)
         .messages({
           "any.required": "view is required",
           "string.empty": "view cannot be empty",
