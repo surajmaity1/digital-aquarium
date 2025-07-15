@@ -32,6 +32,8 @@ function makeContainer3D() {
     aquariumContainer.classList.remove("container3d");
     currentView = "2D";
   }
+
+  document.getElementById("view-type").innerText = currentView;
 }
 
 function addFish() {

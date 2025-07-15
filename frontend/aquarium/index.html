@@ -15,13 +15,12 @@
         <h1>Digital Aquarium</h1>
 
         <div id="controls">
-            <p>Manage Fish
-                <button onclick="openModal('add')">+</button>
-                <button onclick="openModal('remove')">-</button>
+            <p>Controls:
+                <button onclick="openModal('add')">Add</button>
+                <button onclick="openModal('remove')">Manage</button>
             </p>
-            <!-- <p>Toggle Fish type <button onclick="toggleFishType()">Change</button></p> -->
-            <p> Toggle view
-                <button onClick="makeContainer3D()">Change</button>
+            <p>Current view: <span id="view-type">2D</span>
+                <button onClick="makeContainer3D()">Change view</button>
             </p>
         </div>
 
