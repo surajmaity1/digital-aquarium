@@ -1,173 +1,94 @@
-const allFishTypes = [
-  "https://png.pngtree.com/png-clipart/20250222/original/pngtree-small-fish-small-fish-cartoon-cute-cartoon-picture-image_3920714.png", 
-  "https://pngcore.com/files/preview/800x800/11695315407dxwdqrgmdoeiejmjgsfn0xjaoaqphxw0zh5tdwe9aziz6wtuv053wlnnojvuew8exsrau7ni6wiptyp9ukjym3nvoaruvkksqscr.png", 
-  "https://png.pngtree.com/png-clipart/20250417/original/pngtree-blue-little-fish-cartoon-image-png-image_20858183.png", 
-  "https://png.pngtree.com/recommend-works/png-clipart/20250624/ourmid/pngtree-little-blue-fish-baby-png-image_16574545.png"
-];
+const modal = document.getElementById("auth-modal");
+const formContainer = document.getElementById("form-container");
+const toggleFormText = document.getElementById("toggle-form");
 
-const animal = {
-    FISH: "fish",
-    OCTOPUS: "octopus"
-}
-const baseUrl = "https://3000-satyam1203-digitalaquar-9si5mjeg1fb.ws-us120.gitpod.io/api";
-
-let fishCount = 1;
-let previousOctopusXPosition = 100;
-let currentView = "2D";
-let selectedFishType = allFishTypes[0];
-
-const aquariumContainer = document.querySelector(".container");
-const fishContainer = document.getElementById("fishes");
-
-
-function makeContainer3D() {
-  if (currentView === "2D") {
-    aquariumContainer.classList.add("container3d");
-    currentView = "3D";
-  } else {
-    aquariumContainer.classList.remove("container3d");
-    currentView = "2D";
-  }
-}
-
-function addFish() {
-  fishCount += 1;
-  showFishes(fishCount);
-}
-
-function removeFish() {
-  fishCount = Math.max(0, fishCount - 1);
-  showFishes(fishCount);
-}
-
-function toggleFishType() {
-  selectedFishType = allFishTypes[Math.floor(Math.random() * allFishTypes.length)];
-  showFishes(fishCount, selectedFishType);
-}
-
-function showFishes(fishInfo = []) {
-  for (let i = 0; i < fishInfo.length; i++) {
-    const { id, imageUrl, type } = fishInfo[i] || {};
-
-    const fishRef = document.querySelector(`[data-id="${id}"]`);
-
-    // If more fish are needed, add them
-    if (!fishRef) {
-      const img = document.createElement("img");
-      img.src = imageUrl;
-      img.dataset.id = id;
-      if (type == animal.FISH) {
-        img.style.top = `${Math.random() * 75}%`;
-        img.style.animationDuration = `${(Math.random() * 8) + 8}s`;
-      } else if (type == animal.OCTOPUS) {
-        img.style.bottom = 0;
-        img.style.left = `${previousOctopusXPosition}px`;
-        previousOctopusXPosition += 70;
-        img.style.animation = "none";
-      }
-      fishContainer.appendChild(img);
-    } 
-  }
-}
-
-
-const modal = document.getElementById('modal');
-const modalBody = document.getElementById('modal-body');
-
-async function openModal(mode) {
-  modal.classList.remove('hidden');
-
-  if (mode === 'add') {
-    modalBody.innerHTML = `
-      <h3>Add a new animal</h3>
-      <form onsubmit="submitFish(event)">
-        <input type="text" name="name" placeholder="Aquatic animal Name" required />
-        <input type="text" name="imageUrl" placeholder="Image URL" required />
-        <select name="type" required>
-          <option value="">Select Type</option>
-          <option value="fish">🐟 Fish</option>
-          <option value="octopus">🐙 Octopus</option>
-        </select>
-        <textarea name="description" placeholder="Description" rows="3" required></textarea>
-        <button type="submit">Add</button>
-      </form>
-    `;
-  } else if (mode === 'remove') {
-    modalBody.innerHTML = `<h3>All animals</h3><div class="fish-list" id="fish-list">Loading...</div>`;
-    const data = await fetchFishList();
-
-    const list = document.getElementById('fish-list');
-    list.innerHTML = data.map(({ id, name, imageUrl }) => `
-      <div class="fish-item">
-        <span class="fish-name"><img src="${imageUrl}"> ${name}</span>
-        <span class="delete-btn" onclick="deleteFish('${id}')">🗑️</span>
-      </div>
-    `).join('');
-  }
+function openModal(mode = 'signup') {
+  modal.classList.remove("hidden");
+  showForm(mode);
 }
 
 function closeModal() {
-  modal.classList.add('hidden');
+  modal.classList.add("hidden");
 }
 
-// Submit form (add fish)
-async function submitFish(event) {
-  event.preventDefault();
-  const form = event.target;
-  const data = {
-    name: form.name.value,
-    imageUrl: form.imageUrl.value,
-    type: form.type.value,
-    description: form.description.value
-  };
+function showForm(mode) {
+  if (mode === "signup") {
+    formContainer.innerHTML = `
+      <h2>Register</h2>
+      <form onsubmit="handleSignup(event)">
+        <input type="text" name="name" placeholder="Name" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <select name="gender" required>
+          <option value="">Select Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+        <button type="submit">Create Account</button>
+      </form>
+    `;
+    toggleFormText.innerHTML = `Already have an account? <span onclick="showForm('login')">Login</span>`;
+  } else {
+    formContainer.innerHTML = `
+      <h2>Login</h2>
+      <form onsubmit="handleLogin(event)">
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <button type="submit">Login</button>
+      </form>
+    `;
+    toggleFormText.innerHTML = `Don't have an account? <span onclick="showForm('signup')">Register</span>`;
+  }
+}
 
-  try {
-    await fetch(baseUrl + '/fish', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+async function handleSignup(event) {
+    try {
+        event.preventDefault();
+        const data = Object.fromEntries(new FormData(event.target));
+
+        await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        alert("Signed up successfully!");
+        closeModal();
+    } catch (e) {
+        alert("Something went wrong!!");
+    }
+}
+
+async function handleLogin(event) {
+    try {
+    event.preventDefault();
+    const data = Object.fromEntries(new FormData(event.target));
+
+    await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
     });
-    form.reset();
-    closeModal();
-    reloadTank();
-    alert("Added!");
-  } catch (err) {
-    alert("Failed to add.");
-    console.error(err);
-  }
+    window.location.pathname = '/aquarium';
+} catch (e) {
+        alert("Something went wrong!!");
+}
 }
 
-// Load fish list in modal
-async function fetchFishList() {
-  try {
-    const res = await fetch(baseUrl + '/fish');
-    const jsonResponse = await res.json();
-    return jsonResponse?.data || [];
-  } catch (err) {
-    console.error("Failed to load.", err);
-  }
-}
+const facts = [
+  "Octopuses have three hearts!",
+  "Fish sleep with their eyes open.",
+  "Your digital fish remember you!",
+  "Some species change color when happy.",
+  "Tap a fish and it may follow your finger!"
+];
 
-// Delete fish
-async function deleteFish(id) {
-  if (!confirm("Delete this animal?")) return;
+let factIdx = 0;
+setInterval(() => {
+    const factContainer = document.getElementById("fun-fact");
+    if (factContainer) {
 
-  try {
-    await fetch(baseUrl + `/fish/${id}`, {
-      method: 'DELETE'
-    });
-    closeModal();
-    const fishRef = document.querySelector(`[data-id="${id}"]`);
-    fishRef.remove();
-  } catch (err) {
-    alert("Failed to delete.");
-    console.error(err);
-  }
-}
-
-async function reloadTank() {
-  const fishInfo = await fetchFishList();
-  showFishes(fishInfo);
-};
-
-window.onload = reloadTank;
+        factContainer.textContent = facts[factIdx % facts.length];
+        factIdx++;
+    }
+}, 3000);
