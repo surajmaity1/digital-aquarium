@@ -12,7 +12,10 @@
 <body>
 
     <div class="aquarium-main">
-        <h1>Digital Aquarium</h1>
+        <nav>
+            <h1>Digital Aquarium</h1>
+            <p class="logout-cta" onclick="logoutUser()">Logout</p>
+        </nav>
 
         <div id="controls">
             <p>Controls:
@@ -22,14 +25,6 @@
             <p>Current view: <span id="view-type">2D</span>
                 <button onClick="makeContainer3D()">Change view</button>
             </p>
-        </div>
-
-        <!-- Modal container -->
-        <div id="modal" class="modal hidden">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <div id="modal-body"></div>
-            </div>
         </div>
 
         <div class="container">
@@ -47,6 +42,14 @@
                     <img src="https://png.pngtree.com/png-vector/20240322/ourmid/pngtree-green-aquarium-plant-cartoon-png-image_12025865.png">
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal container -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
         </div>
     </div>
 

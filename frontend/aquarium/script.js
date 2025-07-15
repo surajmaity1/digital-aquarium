@@ -23,6 +23,22 @@ function showLoginRequired() {
   document.querySelector('.aquarium-main').classList.add('dimmed');
 }
 
+async function logoutUser() {
+  try {
+    const response = await fetch('/api/auth/logout', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    const state = await response.json();
+
+    if (state?.success) {
+      window.location.pathname = '/';
+    }
+  } catch (e) {
+    alert("Something went wrong while logging out.");
+  }
+}
 
 function makeContainer3D() {
   if (currentView === "2D") {
