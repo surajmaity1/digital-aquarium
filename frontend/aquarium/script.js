@@ -120,10 +120,13 @@ async function openModal(mode) {
     const data = await fetchFishList();
 
     const list = document.getElementById('fish-list');
-    list.innerHTML = data.map(({ id, name, imageUrl }) => `
+    list.innerHTML = data.map(({ id, name, imageUrl, description }) => `
       <div class="fish-item">
-        <span class="fish-name"><img src="${imageUrl}"> ${name}</span>
-        <span class="delete-btn" onclick="deleteFish('${id}')">🗑️</span>
+        <div class="fish-item-header">
+          <span class="fish-name"><img src="${imageUrl}"> ${name}</span>
+          <span class="delete-btn" onclick="deleteFish('${id}')">🗑️</span>
+        </div>
+        <p class="fish-description">${description}</p>
       </div>
     `).join('');
   }

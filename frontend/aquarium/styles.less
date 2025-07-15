@@ -28,6 +28,16 @@ body {
   overflow: hidden;
 }
 
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+
+  .logout-cta {
+    cursor: pointer;
+  }
+}
+
 h1 {
   font-size: 2rem;
   color: var(--accent);
@@ -235,6 +245,10 @@ float: right;
     box-shadow: 0 0 20px #0003;
     position: relative;
 
+    h3 {
+      margin-bottom: 1rem;
+    }
+
     .close {
       position: absolute;
       top: 10px;
@@ -279,14 +293,31 @@ float: right;
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
+      max-height: 400px;
+      overflow: scroll;
 
       .fish-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
         padding: 0.5rem;
         border: 1px solid #eee;
         border-radius: 6px;
+
+        .fish-item-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .fish-description {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          color: #888;
+          font-size: 13px;
+          margin-top: 4px;
+
+        }
 
         .fish-name {
           display: inline-flex;
@@ -296,6 +327,7 @@ float: right;
         img {
           width: 30px;
           height: 30px;
+          margin-right: 8px;
         }
 
         .delete-btn {
