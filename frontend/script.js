@@ -1,6 +1,7 @@
 const modal = document.getElementById("auth-modal");
 const formContainer = document.getElementById("form-container");
 const toggleFormText = document.getElementById("toggle-form");
+const formErrorTextContainer = document.getElementById("error-text");
 
 function openModal(mode = 'signup') {
   modal.classList.remove("hidden");
@@ -11,7 +12,12 @@ function closeModal() {
   modal.classList.add("hidden");
 }
 
+function showFormError(message) {
+    formErrorTextContainer.innerText = message;
+}
+
 function showForm(mode) {
+  showFormError("");
   if (mode === "signup") {
     formContainer.innerHTML = `
       <h2>Register</h2>
@@ -47,13 +53,19 @@ async function handleSignup(event) {
         event.preventDefault();
         const data = Object.fromEntries(new FormData(event.target));
 
-        await fetch('/api/auth/register', {
+        const response = await fetch('/api/auth/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         });
-        alert("Signed up successfully!");
-        closeModal();
+        const state = await response.json();
+
+        if (state.error) {
+            showFormError(state?.message);
+        } else {
+            alert("Signed up successfully! Please use login form to access aquarium!");
+            closeModal();
+        }
     } catch (e) {
         alert("Something went wrong!!");
     }
@@ -64,12 +76,19 @@ async function handleLogin(event) {
     event.preventDefault();
     const data = Object.fromEntries(new FormData(event.target));
 
-    await fetch('/api/auth/login', {
+    const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
     });
-    window.location.pathname = '/aquarium';
+
+    const state = await response.json();
+
+    if (!state.success) {
+        showFormError(state?.message);
+    } else {
+        window.location.pathname = '/aquarium';
+    }
 } catch (e) {
         alert("Something went wrong!!");
 }

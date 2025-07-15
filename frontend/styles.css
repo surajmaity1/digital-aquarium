@@ -101,6 +101,11 @@ body {
 .modal form button:hover {
   background: #1f7fb6;
 }
+.modal #error-text {
+  color: red;
+  min-height: 16px;
+  font-size: 14px;
+}
 .modal .toggle-text {
   margin-top: 1rem;
   text-align: center;
