@@ -18,6 +18,11 @@ let selectedFishType = allFishTypes[0];
 const aquariumContainer = document.querySelector(".container");
 const fishContainer = document.getElementById("fishes");
 
+function showLoginRequired() {
+  document.querySelector('.unauthorized-overlay').style.display = 'flex';
+  document.querySelector('.aquarium-main').classList.add('dimmed');
+}
+
 
 function makeContainer3D() {
   if (currentView === "2D") {
@@ -141,6 +146,9 @@ async function fetchFishList() {
   try {
     const res = await fetch('/api/fish');
     const jsonResponse = await res.json();
+    if (jsonResponse?.message === "Unauthorized") {
+      showLoginRequired();
+    }
     return jsonResponse?.data || [];
   } catch (err) {
     console.error("Failed to load.", err);

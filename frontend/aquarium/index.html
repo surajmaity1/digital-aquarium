@@ -11,43 +11,56 @@
 
 <body>
 
-    <h1>Fish Aquarium</h1>
+    <div class="aquarium-main">
+        <h1>Digital Aquarium</h1>
 
-    <div id="controls">
-        <p>Manage Fish
-            <button onclick="openModal('add')">+</button>
-            <button onclick="openModal('remove')">-</button>
-        </p>
-        <!-- <p>Toggle Fish type <button onclick="toggleFishType()">Change</button></p> -->
-        <p> Toggle view
-            <button onClick="makeContainer3D()">Change</button>
-        </p>
-    </div>
-
-    <!-- Modal container -->
-    <div id="modal" class="modal hidden">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <div id="modal-body"></div>
+        <div id="controls">
+            <p>Manage Fish
+                <button onclick="openModal('add')">+</button>
+                <button onclick="openModal('remove')">-</button>
+            </p>
+            <!-- <p>Toggle Fish type <button onclick="toggleFishType()">Change</button></p> -->
+            <p> Toggle view
+                <button onClick="makeContainer3D()">Change</button>
+            </p>
         </div>
-    </div>
 
-    <div class="container">
-        <div class="walls">
-            <div class="wall front"></div>
-            <div class="wall left"></div>
-            <div class="wall back"></div>
-            <div class="wall right"></div>
-            <div class="wall bottom"></div>
+        <!-- Modal container -->
+        <div id="modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <div id="modal-body"></div>
+            </div>
+        </div>
 
-            <div id="fishes"></div>
+        <div class="container">
+            <div class="walls">
+                <div class="wall front"></div>
+                <div class="wall left"></div>
+                <div class="wall back"></div>
+                <div class="wall right"></div>
+                <div class="wall bottom"></div>
 
-            <div class="plants">
-                <img src="https://png.pngtree.com/png-vector/20240531/ourmid/pngtree-underwater-aquarium-plant-cartoon-png-image_12580141.png">
-                <img src="https://png.pngtree.com/png-vector/20240322/ourmid/pngtree-green-aquarium-plant-cartoon-png-image_12025865.png">
+                <div id="fishes"></div>
+
+                <div class="plants">
+                    <img src="https://png.pngtree.com/png-vector/20240531/ourmid/pngtree-underwater-aquarium-plant-cartoon-png-image_12580141.png">
+                    <img src="https://png.pngtree.com/png-vector/20240322/ourmid/pngtree-green-aquarium-plant-cartoon-png-image_12025865.png">
+                </div>
             </div>
         </div>
     </div>
+
+    <div class="unauthorized-overlay">
+        <div class="unauthorized-modal">
+            <div class="message-box">
+                <h1>🐠 Hold up!</h1>
+                <p>You're outside the tank. Swim back in by logging in!</p>
+                <div class="actions">
+                    Click here to go back to <a href="/">home</a>.
+                </div>
+            </div>
+        </div>
     </div>
     <script src="./script.js"></script>
 </body>

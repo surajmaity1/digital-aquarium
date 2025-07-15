@@ -259,3 +259,54 @@ h1 {
   color: red;
   font-size: 1.2rem;
 }
+.dimmed {
+  filter: blur(3px);
+  opacity: 0.8;
+  pointer-events: none;
+}
+/* Full-screen overlay */
+.unauthorized-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 30, 60, 0.3);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+.unauthorized-modal {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 3rem;
+  color: white;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+}
+.unauthorized-modal h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.unauthorized-modal p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+.unauthorized-modal .actions {
+  display: flex;
+  justify-content: center;
+}
+.unauthorized-modal .actions a {
+  margin-left: 8px;
+}
+.unauthorized-modal .actions button {
+  background: #2d9cdb;
+  border: none;
+  border-radius: 6px;
+  padding: 0.7rem 1.5rem;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.unauthorized-modal .actions button:hover {
+  background: #1f7fb6;
+}
