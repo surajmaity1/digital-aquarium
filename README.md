@@ -129,7 +129,7 @@ This endpoint allows you to delete a fish from the Digital Aquarium by its uniqu
 
 ### 🧭 Create Aquarium View Dimension (2D / 3D)
 
-**POST** `/api/dimentions`
+**POST** `/api/dimensions`
 
 This endpoint allows you to create and set the display dimension of the Digital Aquarium UI—either in 2D or 3D view.
 
@@ -173,7 +173,7 @@ or
 
 ### 🧭 Fetch Aquarium View Dimension (2D / 3D)
 
-**POST** `/api/dimentions`
+**POST** `/api/dimensions`
 
 This endpoint allows you to fetch the display dimension of the Digital Aquarium UI—either in 2D or 3D view.
 
@@ -207,7 +207,7 @@ This endpoint allows you to set the display dimension of the Digital Aquarium UI
 
 ### 🧩 Endpoint
 
-**PUT** `/api/dimentions`
+**PUT** `/api/dimensions`
 
 ### ✅ Sample Request
 
@@ -226,7 +226,7 @@ Response Body:
 
 ```json
 {
-  "message": "dimentions updated successfully",
+  "message": "dimensions updated successfully",
   "data": {
     "view": "3D"
   }
@@ -241,7 +241,7 @@ Response Body:
 
 ```json
 {
-  "message": "View not updated as already same dimention implemented",
+  "message": "View not updated as already same dimensions implemented",
   "data": {
     "view": "3D"
   }
@@ -288,7 +288,7 @@ curl --location 'https://digital-aquarium.vercel.app/api/fish/68728c66c8c9a3be5e
 GET:
 
 ```sh
-curl --location --request PUT 'https://digital-aquarium.vercel.app/api/dimentions' \
+curl --location --request PUT 'https://digital-aquarium.vercel.app/api/dimensions' \
 --header 'Content-Type: application/json' \
 --data '{
     "view": "3D"
