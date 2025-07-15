@@ -10,6 +10,8 @@ Used to create a new fish with specified details such as name, description, imag
 
 ### ✅ Sample Request
 
+**Request Body:**
+
 ```json
 {
   "name": "Gold Fish",
@@ -21,7 +23,7 @@ Used to create a new fish with specified details such as name, description, imag
 
 ### 📦 Sample Response
 
-**Status Code:** `201 OK`
+**Status Code:** `201 Created`
 
 ```json
 {
@@ -125,6 +127,80 @@ This endpoint allows you to delete a fish from the Digital Aquarium by its uniqu
 
 ---
 
+### 🧭 Create Aquarium View Dimension (2D / 3D)
+
+**POST** `/api/dimentions`
+
+This endpoint allows you to create and set the display dimension of the Digital Aquarium UI—either in 2D or 3D view.
+
+### ✅ Sample Request
+
+**Request Body:**
+
+```json
+{
+  "view": "3D"
+}
+```
+
+### 📦 Sample Response
+
+**Status Code:** `201 Created`
+
+```json
+{
+  "message": "Dimension created successfully",
+  "data": {
+    "view": "3D"
+  }
+}
+```
+
+or
+
+**Status Code:** `400 Bad Request`
+
+```json
+{
+  "message": "Dimension already created",
+  "data": {
+    "view": "3D"
+  }
+}
+```
+
+---
+
+### 🧭 Fetch Aquarium View Dimension (2D / 3D)
+
+**POST** `/api/dimentions`
+
+This endpoint allows you to fetch the display dimension of the Digital Aquarium UI—either in 2D or 3D view.
+
+### 📦 Sample Response
+
+**Status Code:** `200 OK`
+
+```json
+{
+  "message": "Dimension fetched successfully",
+  "data": {
+    "view": "3D"
+  }
+}
+```
+or
+
+**Status Code:** `404 Not Found`
+
+```json
+{
+  "message": "No dimension found. Please create dimensions"
+}
+```
+
+---
+
 ### 🧭 Set Aquarium View Dimension (2D / 3D)
 
 This endpoint allows you to set the display dimension of the Digital Aquarium UI—either in 2D or 3D view.
@@ -135,9 +211,7 @@ This endpoint allows you to set the display dimension of the Digital Aquarium UI
 
 ### ✅ Sample Request
 
-**Method:** `POST`
-
-### ✅ Sample Request
+**Request Body:**
 
 ```json
 {
@@ -161,7 +235,7 @@ Response Body:
 
 ### 📦 Sample No-Update Response (when view is already the same)
 
-Status Code: 400 OK
+**Status Code:** `400 Bad request`
 
 Response Body:
 
