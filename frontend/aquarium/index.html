@@ -1,0 +1,70 @@
+<!-- https://codepen.io/satyam1203/pen/KwdPqvM?editors=1010 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Fish aquarium</title>
+</head>
+
+<body>
+
+    <div class="aquarium-main">
+        <nav>
+            <h1>Digital Aquarium</h1>
+            <p class="logout-cta" onclick="logoutUser()">Logout</p>
+        </nav>
+
+        <div id="controls">
+            <p>Controls:
+                <button onclick="openModal('add')">Add</button>
+                <button onclick="openModal('remove')">Manage</button>
+            </p>
+            <p>Current view: <span id="view-type">2D</span>
+                <button onClick="makeContainer3D()">Change view</button>
+            </p>
+        </div>
+
+        <div class="container">
+            <div class="walls">
+                <div class="wall front"></div>
+                <div class="wall left"></div>
+                <div class="wall back"></div>
+                <div class="wall right"></div>
+                <div class="wall bottom"></div>
+
+                <div id="fishes"></div>
+
+                <div class="plants">
+                    <img src="https://png.pngtree.com/png-vector/20240531/ourmid/pngtree-underwater-aquarium-plant-cartoon-png-image_12580141.png">
+                    <img src="https://png.pngtree.com/png-vector/20240322/ourmid/pngtree-green-aquarium-plant-cartoon-png-image_12025865.png">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal container -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <div class="unauthorized-overlay">
+        <div class="unauthorized-modal">
+            <div class="message-box">
+                <h1>🐠 Hold up!</h1>
+                <p>You're outside the tank. Swim back in by logging in!</p>
+                <div class="actions">
+                    Click here to go back to <a href="/">home</a>.
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./script.js"></script>
+</body>
+
+</html>

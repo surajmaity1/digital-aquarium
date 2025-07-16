@@ -3,11 +3,18 @@ import { router } from "./routes/index.js";
 import { middleware } from "./middlewares/index.js";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import path from "path";
+
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 dotenv.config();
 
 const PORT = process.env.SERVER_PORT;
+app.use(express.static(path.join(__dirname, '../frontend')));
+
 app.get("/health", (req, res) => {
   res.json({ message: `Server is up and running 🎉` });
 });

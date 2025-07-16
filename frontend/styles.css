@@ -1,188 +1,59 @@
-:root {
-  --base-width: 200px;
-  --base-height: 350px;
-  --glass-color: #a0e4ff88;
-  --wall-border: #fff3;
-  --glass-blur: 1px;
-  --tank-shadow: 0 2px 10px #0003;
-  --accent: #2d9cdb;
-  --bg: #f0f9ff;
-  --accent-dark: #207ab3;
-  --container-width: 500px;
-}
-* {
-  box-sizing: border-box;
-  margin: 0;
-  transform-style: preserve-3d;
-  font-family: 'Segoe UI', sans-serif;
-}
 body {
-  background: var(--bg);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #031B3B, #062A57);
+  color: white;
   height: 100vh;
   overflow: hidden;
 }
-h1 {
-  font-size: 2rem;
-  color: var(--accent);
-  margin-bottom: 1rem;
-}
-.container {
-  width: var(--container-width);
-  overflow: hidden;
-  transform: translate(0, 100px);
-  transition: transform 0.5s ease;
-}
-.container3d {
-  overflow: unset;
-  perspective: 200em;
-  transform: translate(0, 150px) rotateX(-30deg) scale(0.85);
-}
-.container3d .walls {
-  transform-style: preserve-3d;
-  transform: rotateY(20deg);
-}
-.container3d .walls .wall.front {
-  display: block;
-}
-.walls {
-  width: var(--base-width);
-  height: var(--base-height);
-  position: relative;
-}
-.walls > .wall {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background-color: var(--glass-color);
-  border: 1px solid var(--wall-border);
-  box-shadow: inset 0 0 8px var(--wall-border), var(--tank-shadow);
-  backdrop-filter: blur(var(--glass-blur));
-  border-radius: 8px;
-}
-.walls .front {
-  display: none;
-  width: calc(var(--base-width) * 2.5);
-  transform: translateZ(calc(var(--base-width) * 0.5));
-  background: linear-gradient(to bottom, #d4f1ff99, #a0e4ffcc);
-}
-.walls .back {
-  width: calc(var(--base-width) * 2.5);
-  transform: translateZ(calc(var(--base-width) * -1.5)) rotateX(180deg);
-  background: linear-gradient(to top, #d4f1ff99, #a0e4ffcc);
-}
-.walls .left {
-  width: calc(var(--base-width) * 2);
-  transform: translateX(calc(var(--base-width) * -1)) translateZ(-100px) rotateY(270deg);
-  background: linear-gradient(to right, #d4f1ff88, #a0e4ff88);
-}
-.walls .right {
-  width: calc(var(--base-width) * 2);
-  transform: translateX(calc(var(--base-width) * 1.5)) translateZ(-100px) rotateY(90deg);
-  background: linear-gradient(to left, #d4f1ff88, #a0e4ff88);
-}
-.walls .bottom {
-  width: calc(var(--base-width) * 2.5);
-  height: calc(var(--base-width) * 2);
-  transform: translateY(150px) translateZ(-100px) rotateX(-90deg);
-  background: radial-gradient(#ddd, #bbb);
-  background-size: 20px 20px;
-}
-.plants {
-  position: absolute;
-  bottom: -5px;
-  width: var(--container-width);
-}
-.plants img {
-  height: 50px;
-  margin: 0;
-  float: left;
-  animation: wavePlant 3s infinite ease-in-out;
-}
-.plants img:last-child {
-  float: right;
-}
-@keyframes wavePlant {
-  0%,
-  100% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(5deg);
-  }
-}
-#fishes {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-#fishes img {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  animation: roamAround 10s linear infinite;
-  filter: drop-shadow(1px 2px 2px #0003);
-  opacity: 0.9;
-}
-@keyframes roamAround {
-  0% {
-    left: 0;
-    transform: scaleX(-1);
-  }
-  50% {
-    left: 210%;
-    transform: scaleX(-1);
-  }
-  51% {
-    transform: scaleX(1);
-  }
-  100% {
-    left: 0;
-  }
-}
-#controls {
+.hero {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  background: #fff;
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 0 12px #0002;
-  border: 1px solid #eee;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
 }
-#controls p {
-  margin: 0;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #444;
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("https://content.presentermedia.com/files/clipart/00031000/31043/bubbles_in_blue_water_800_wht.jpg");
+  background-size: cover;
+  filter: blur(1px);
+  z-index: -2;
 }
-#controls p button {
-  margin-left: 10px;
-  padding: 6px 10px;
-  font-size: 0.9rem;
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+.hero p {
+  font-size: 1.25rem;
+  max-width: 500px;
+  margin-bottom: 2rem;
+}
+.hero .cta-buttons button {
+  padding: 0.8rem 2rem;
+  margin: 0 1rem;
   border: none;
-  background: var(--accent);
-  color: white;
   border-radius: 6px;
+  background: #2d9cdb;
+  color: white;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background 0.3s;
 }
-#controls p button:hover {
-  background: var(--accent-dark);
+.hero .cta-buttons button:hover {
+  background: #1f7fb6;
 }
 .modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #0007;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   z-index: 99;
 }
 .modal.hidden {
@@ -190,72 +61,89 @@ h1 {
 }
 .modal .modal-content {
   background: #fff;
+  color: #000;
   padding: 2rem;
   border-radius: 10px;
-  width: 400px;
-  max-height: 80vh;
-  overflow-y: auto;
-  box-shadow: 0 0 20px #0003;
+  width: 90%;
+  max-width: 400px;
   position: relative;
+  text-align: left;
 }
-.modal .modal-content .close {
+.modal .close {
   position: absolute;
-  top: 10px;
-  right: 15px;
+  top: 1rem;
+  right: 1.5rem;
   font-size: 1.5rem;
+  color: #666;
   cursor: pointer;
 }
-.modal .modal-content form {
+.modal form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
-.modal .modal-content form select {
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-  background: white;
-}
-.modal .modal-content form input,
-.modal .modal-content form textarea {
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-}
-.modal .modal-content form button {
+.modal form input,
+.modal form select {
   padding: 0.6rem;
-  background: var(--accent);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
   font-size: 1rem;
-}
-.modal .modal-content .fish-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-.modal .modal-content .fish-list .fish-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem;
-  border: 1px solid #eee;
+  border: 1px solid #ccc;
   border-radius: 6px;
 }
-.modal .modal-content .fish-list .fish-item .fish-name {
-  display: inline-flex;
-  align-items: center;
-}
-.modal .modal-content .fish-list .fish-item img {
-  width: 30px;
-  height: 30px;
-}
-.modal .modal-content .fish-list .fish-item .delete-btn {
+.modal form button {
+  background: #2d9cdb;
+  border: none;
+  color: white;
+  padding: 0.7rem;
+  font-size: 1rem;
+  border-radius: 6px;
   cursor: pointer;
+}
+.modal form button:hover {
+  background: #1f7fb6;
+}
+.modal #error-text {
   color: red;
-  font-size: 1.2rem;
+  min-height: 16px;
+  font-size: 14px;
+}
+.modal .toggle-text {
+  margin-top: 1rem;
+  text-align: center;
+}
+.modal .toggle-text #toggle-form span {
+  color: #2d9cdb;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.fish-bg {
+  overflow: hidden;
+}
+.fish-bg .floating-fish {
+  position: absolute;
+  width: 80px;
+  animation: swimAcross 20s linear infinite;
+  animation-direction: reverse;
+  top: 20%;
+}
+.fish-bg .floating-fish.reverse {
+  transform: scaleX(-1);
+  top: 48%;
+  animation-direction: normal;
+}
+@keyframes swimAcross {
+  0% {
+    left: -100px;
+  }
+  100% {
+    left: 110%;
+  }
+}
+.fact-bar {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  color: #1f2629;
+  font-style: italic;
 }
